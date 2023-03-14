@@ -89,7 +89,7 @@ nav {
   border: 1px solid var(--color-gray-light);
 }
 
-footer{
+footer {
   width: 100%;
   border: 1px solid var(--color-black);
   position: fixed;
@@ -97,11 +97,11 @@ footer{
 }
 
 .footer-div1 {
-padding: 1% 2%;
-background-color: var(--color-light);
+  padding: 1% 2%;
+  background-color: var(--color-light);
 }
 
 .footer-div2 {
   padding: 2%;
-  background-color: var(--color-light-pitch)
-  }
+  background-color: var(--color-light-pitch);
+}
