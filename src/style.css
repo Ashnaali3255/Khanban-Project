@@ -88,3 +88,20 @@ nav {
   color: var(--color-dark-pitch);
   border: 1px solid var(--color-gray-light);
 }
+
+footer{
+  width: 100%;
+  border: 1px solid var(--color-black);
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-div1 {
+padding: 1% 2%;
+background-color: var(--color-light);
+}
+
+.footer-div2 {
+  padding: 2%;
+  background-color: var(--color-light-pitch)
+  }
