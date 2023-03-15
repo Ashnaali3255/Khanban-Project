@@ -10,7 +10,8 @@
   --color-white: #fff;
   --color-black: #272a31;
   --color-light-pitch: #fdf2e9;
-  --color-dark-pitch: #cf711f;
+  --color-dark-pitch: #e67e22;
+  --color-dark: #cf711f;
   --color-light: #fae5d3;
   --color-gray-light: #d3d3d3;
   --color-gray: #adadad;
@@ -23,8 +24,7 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: var(--color-light-pitch);
 }
 
 a {
@@ -42,8 +42,11 @@ a:active {
 
 /* -------------------------------Styling the Navigation Bar-------------------------------- */
 header {
-  border: 1px solid var(--color-gray-light);
+  border: 1px solid var(--color-dark-pitch);
   border-radius: 4px;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
 
 nav {
@@ -57,51 +60,84 @@ nav {
 
 .navLinks {
   display: flex;
-  justify-content: space-between;
-}
-
-.filter {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  padding: 0.5% 4%;
-  background-color: var(--color-light-pitch);
-}
-
-.filterBtns {
-  display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-.filterButton {
-  padding: 5px 16px;
+/* -------------------------------Styling the Home Page-------------------------------- */
+main {
+  padding: 60px 0;
+}
+
+.mealsListContainer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+}
+
+.mealCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  border: 1px solid var(--color-dark-pitch);
+  padding: 2%;
+  border-radius: 8px;
+}
+
+.mealCard img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.mealDetail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.mealHeading {
+  font-size: 16px;
+}
+
+.commentBtn {
+  padding: 2% 3%;
+  align-self: center;
+  color: var(--color-white);
+  font-weight: 600;
   background-color: var(--color-dark-pitch);
   border: none;
   border-radius: 8px;
-  color: var(--color-white);
-  font-weight: 600;
-  cursor: pointer;
+  margin-bottom: 10px;
 }
 
-.filterButton:hover {
-  background-color: var(--color-white);
-  color: var(--color-dark-pitch);
-  border: 1px solid var(--color-gray-light);
+.commentBtn:hover {
+  background-color: var(--color-dark);
+  color: var(--color-light);
 }
 
+/* -------------------------------Styling the Footer-------------------------------- */
 footer {
   width: 100%;
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-dark-pitch);
   position: fixed;
   bottom: 0;
+  border-radius: 4px;
 }
 
 .footer-div1 {
-  padding: 1% 2%;
+  padding: 1%;
   background-color: var(--color-light);
 }
 
 .footer-div2 {
-  padding: 2%;
+  padding: 1%;
   background-color: var(--color-light-pitch);
 }
