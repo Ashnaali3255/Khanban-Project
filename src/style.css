@@ -187,9 +187,15 @@ textarea {
   outline: none;
 }
 
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  background-color: var(--color-white);
+}
+
 input:focus {
   outline-style: none;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 input:-webkit-autofill,
@@ -201,29 +207,36 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
   color: #555 !important;
   font-size: inherit !important;
   font-family: inherit !important;
   line-height: inherit !important;
 }
 
-input::-webkit-credentials-auto-fill-button {
-  visibility: hidden;
-  pointer-events: none;
-  background-color: var(--color-white);
-}
-
 .submitCommentBtn {
   padding: 2% 3%;
-  align-self: center;
+  align-self: flex-start;
   color: var(--color-white);
   font-weight: 600;
   background-color: var(--color-dark-pitch);
   border: none;
   border-radius: 8px;
   margin-bottom: 10px;
-  align-self: flex-start;
+}
+
+/* -------------------------------Styling the Comments Section-------------------------------- */
+.commentsCount {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.commentitem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
 }
 
 /* -------------------------------Styling the Footer-------------------------------- */

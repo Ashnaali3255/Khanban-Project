@@ -1,6 +1,7 @@
-import _ from 'lodash';
 import './style.css';
 import getMeals from './modules/getMeals.js';
+import { postComment, getComments } from './modules/commentsApi.js';
+import totalComments from './modules/countComments.js';
 
 const renderMeal = async () => {
   const response = await getMeals();
@@ -20,7 +21,7 @@ const renderMeal = async () => {
             </div>
             <button type="button" class="commentBtn seeCommentsBtn">Comments</button>
           </article>
-  `
+  `,
   );
   mealsListContainer.innerHTML = mealItem.join('');
 };
@@ -45,12 +46,11 @@ const renderPopup = async () => {
       scrollUp();
       popupWindow.innerHTML = `
         <article class="popupCard" id="${mealData.idMeal}">        
-        <img class="popupCardImage" src="${mealData.strMealThumb}" alt="${mealData.strMeal}" />
-                
+        <img class="popupCardImage" src="${mealData.strMealThumb}" alt="${mealData.strMeal}" />                
           <h2 class="mealTitle">${mealData.strMeal}</h2>
-          <div class="commentsContainer">
-          <p class="comment"></p>
-          </div>       
+          <h3 class="commentsCount">Total Comments(<p class="commentsTotal"></p>)</h3>
+          <ul class="commentsList">            
+          </ul>       
             <h3 class="commentsHeading">Add a comment</h3>
               <form action="">
                 <label for="nameInput">
@@ -87,6 +87,55 @@ const renderPopup = async () => {
         popupWindow.classList.add('hide');
         popupWindow.classList.remove('overlay');
       });
+
+      const submitCommentBtn = document.querySelector('.submitCommentBtn');
+      const nameInput = document.querySelector('.nameInput');
+      const commentInput = document.querySelector('.textArea');
+
+      const submitcomment = async () => {
+        const nameInputValue = nameInput.value.trim();
+        const textAreaValue = commentInput.value.trim();
+        if (nameInput.value.trim() !== '' && commentInput.value.trim() !== '') {
+          await postComment({
+            item_id: mealId,
+            username: nameInputValue,
+            comment: textAreaValue,
+          });
+          document.querySelector('form').reset();
+        }
+      };
+
+      const displayComments = async () => {
+        const response = await getComments(mealId);
+        const totalCommentsNumber = document.querySelector('.commentsTotal');
+        const total = totalComments(response);
+        if (!total) {
+          totalCommentsNumber.innerHTML = 0;
+        } else {
+          totalCommentsNumber.innerHTML = total;
+        }
+
+        const listContainer = document.querySelector('.commentsList');
+        listContainer.innerHTML = '';
+
+        const commentItem = response.map(
+          (data) => `
+        <li class="commentitem">
+        <p class="date">${data.creation_date}: </p>
+        <p class="username">${data.username}: </p>
+        <p class="comment">${data.comment}</p>
+      </li>
+        `,
+        );
+        listContainer.innerHTML = commentItem.join('');
+      };
+
+      submitCommentBtn.addEventListener('click', async () => {
+        await submitcomment();
+        displayComments();
+      });
+
+      displayComments();
     });
   });
 };
