@@ -59,7 +59,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Video Demo Link](https://drive.google.com/drive/folders/1rlqJvtfPCg90fzQiG6vADPIt1DeUZhde)
+- [Live Video Demo Link](https://drive.google.com/file/d/1-rNFKB6WS_X3w1FEG1YcJs6z7Tf2zPkc/view?usp=share_link)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
