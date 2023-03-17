@@ -22,6 +22,7 @@ const getNumberOfLikes = (response, likes) => {
 
 const renderMeal = async () => {
   const response = await getMeals();
+
   const likes = await getLikes();
   const numberOfLikes = getNumberOfLikes(response, likes);
 
@@ -70,11 +71,7 @@ const renderMeal = async () => {
       displayLikes(id, likesTotal);
     });
   });
-};
 
-const renderPopup = async () => {
-  renderMeal();
-  const response = await getMeals();
   const seeCommentsBtns = document.querySelectorAll('.seeCommentsBtn');
   const popupWindow = document.querySelector('.popupWindow');
 
@@ -85,7 +82,6 @@ const renderPopup = async () => {
 
   seeCommentsBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-      console.log('See btn clicked');
       const mealId = e.target.parentNode.getAttribute('id');
       const mealData = response.find((meal) => meal.idMeal === mealId);
       popupWindow.classList.remove('hide');
@@ -186,7 +182,6 @@ const renderPopup = async () => {
     });
   });
 };
-
 window.addEventListener('DOMContentLoaded', () => {
-  renderPopup();
+  renderMeal();
 });
