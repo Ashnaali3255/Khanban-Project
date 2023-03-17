@@ -225,6 +225,11 @@ select:-webkit-autofill:focus {
 }
 
 /* -------------------------------Styling the Comments Section-------------------------------- */
+.color {
+  color: red;
+}
+
+/* -------------------------------Styling the Comments Section-------------------------------- */
 .commentsCount {
   display: flex;
   justify-content: flex-start;

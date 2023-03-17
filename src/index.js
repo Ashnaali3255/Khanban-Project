@@ -2,9 +2,29 @@ import './style.css';
 import getMeals from './modules/getMeals.js';
 import { postComment, getComments } from './modules/commentsApi.js';
 import totalComments from './modules/countComments.js';
+import { postLike, getLikes } from './modules/likesApi.js';
+
+const getNumberOfLikes = (response, likes) => {
+  const mealLikes = new Map();
+
+  response.forEach((meal) => {
+    let num = 0;
+    for (let i = 0; i < likes.length; i += 1) {
+      if (meal.idMeal === likes[i].item_id) {
+        num = likes[i].likes;
+        break;
+      }
+    }
+    mealLikes.set(meal.idMeal, num);
+  });
+  return mealLikes;
+};
 
 const renderMeal = async () => {
   const response = await getMeals();
+  const likes = await getLikes();
+  const numberOfLikes = getNumberOfLikes(response, likes);
+
   const mealsListContainer = document.querySelector('.mealsListContainer');
   mealsListContainer.innerHTML = '';
 
@@ -14,16 +34,42 @@ const renderMeal = async () => {
             <img src=${data.strMealThumb} alt=${data.strMeal} />
             <div class="mealDetail">
               <h2 class="mealHeading">${data.strMeal}</h2>
-              <a href="#">
+              <a href="#" class="likeBtn">
                 <i class="fa-solid fa-heart"></i>
               </a>
-              <span class="likesNumber">0</span>
+              <span class="likesNumber">${numberOfLikes.get(data.idMeal)}</span>
             </div>
             <button type="button" class="commentBtn seeCommentsBtn">Comments</button>
           </article>
-  `,
+  `
   );
   mealsListContainer.innerHTML = mealItem.join('');
+
+  const displayLikes = async (targetId, likesTotal) => {
+    const likesArray = await getLikes();
+
+    for (let n = 0; n < likesArray.length; n += 1) {
+      if (likesArray[n].item_id === targetId) {
+        likesTotal.innerHTML = likesArray[n].likes;
+      }
+    }
+  };
+
+  const likeBtns = document.querySelectorAll('.likeBtn');
+  likeBtns.forEach((likeBtn) => {
+    likeBtn.addEventListener('click', async (event) => {
+      event.preventDefault();
+      likeBtn.classList.add('color');
+      const id =
+        event.target.parentNode.parentNode.parentNode.getAttribute('id');
+      await postLike({
+        item_id: id,
+      });
+      const likesTotal = event.target.parentNode.nextSibling.nextSibling;
+
+      displayLikes(id, likesTotal);
+    });
+  });
 };
 
 const renderPopup = async () => {
@@ -39,6 +85,7 @@ const renderPopup = async () => {
 
   seeCommentsBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
+      console.log('See btn clicked');
       const mealId = e.target.parentNode.getAttribute('id');
       const mealData = response.find((meal) => meal.idMeal === mealId);
       popupWindow.classList.remove('hide');
@@ -125,7 +172,7 @@ const renderPopup = async () => {
         <p class="username">${data.username}: </p>
         <p class="comment">${data.comment}</p>
       </li>
-        `,
+        `
         );
         listContainer.innerHTML = commentItem.join('');
       };
@@ -141,6 +188,5 @@ const renderPopup = async () => {
 };
 
 window.addEventListener('DOMContentLoaded', () => {
-  renderMeal();
   renderPopup();
 });
