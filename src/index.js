@@ -2,6 +2,7 @@ import './style.css';
 import getMeals from './modules/getMeals.js';
 import { postComment, getComments } from './modules/commentsApi.js';
 import totalComments from './modules/countComments.js';
+import totalMeals from './modules/countMeals.js';
 import { postLike, getLikes } from './modules/likesApi.js';
 
 const getNumberOfLikes = (response, likes) => {
@@ -21,8 +22,20 @@ const getNumberOfLikes = (response, likes) => {
 };
 
 const renderMeal = async () => {
-  const response = await getMeals();
+   const response = await getMeals();
 
+// const displayMeals = async () => {
+    
+//     const totalMealsNumber = document.querySelector('.totalMeals');
+//      const response = await getMeals();
+//     const total = totalMeals(response);
+//     if (!total) {
+//       totalMealsNumber.innerHTML = 0;
+//     } else {
+//       totalMealsNumber.innerHTML = total;
+//     }
+//     displayMeals();
+  
   const likes = await getLikes();
   const numberOfLikes = getNumberOfLikes(response, likes);
 
@@ -43,7 +56,7 @@ const renderMeal = async () => {
             <button type="button" class="commentBtn seeCommentsBtn">Comments</button>
           </article>
   `
-  );
+);
   mealsListContainer.innerHTML = mealItem.join('');
 
   const displayLikes = async (targetId, likesTotal) => {
@@ -55,6 +68,7 @@ const renderMeal = async () => {
       }
     }
   };
+
 
   const likeBtns = document.querySelectorAll('.likeBtn');
   likeBtns.forEach((likeBtn) => {
@@ -181,7 +195,19 @@ const renderMeal = async () => {
       displayComments();
     });
   });
+
 };
+const displayMeals = async () => {
+    
+  const totalMealsNumber = document.querySelector('.totalMeals');
+   const response = await getMeals();
+  const total = totalMeals(response);
+  totalMealsNumber.innerHTML = total;
+  
+};
+displayMeals();
+
 window.addEventListener('DOMContentLoaded', () => {
   renderMeal();
 });
+

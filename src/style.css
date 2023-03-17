@@ -64,6 +64,10 @@ nav {
   align-items: center;
 }
 
+.totalMeals{
+  color: var(--color-dark);
+  margin-left: 5%;
+}
 /* -------------------------------Styling the Home Page-------------------------------- */
 main {
   padding: 60px 0;
