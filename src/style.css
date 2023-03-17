@@ -27,6 +27,10 @@ body {
   background-color: var(--color-light-pitch);
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   color: var(--color-black);
 }
@@ -64,10 +68,11 @@ nav {
   align-items: center;
 }
 
-.totalMeals{
+.totalMeals {
   color: var(--color-dark);
   margin-left: 5%;
 }
+
 /* -------------------------------Styling the Home Page-------------------------------- */
 main {
   padding: 60px 0;

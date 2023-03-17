@@ -22,20 +22,20 @@ const getNumberOfLikes = (response, likes) => {
 };
 
 const renderMeal = async () => {
-   const response = await getMeals();
+  const response = await getMeals();
 
-// const displayMeals = async () => {
-    
-//     const totalMealsNumber = document.querySelector('.totalMeals');
-//      const response = await getMeals();
-//     const total = totalMeals(response);
-//     if (!total) {
-//       totalMealsNumber.innerHTML = 0;
-//     } else {
-//       totalMealsNumber.innerHTML = total;
-//     }
-//     displayMeals();
-  
+  // const displayMeals = async () => {
+
+  //     const totalMealsNumber = document.querySelector('.totalMeals');
+  //      const response = await getMeals();
+  //     const total = totalMeals(response);
+  //     if (!total) {
+  //       totalMealsNumber.innerHTML = 0;
+  //     } else {
+  //       totalMealsNumber.innerHTML = total;
+  //     }
+  //     displayMeals();
+
   const likes = await getLikes();
   const numberOfLikes = getNumberOfLikes(response, likes);
 
@@ -55,8 +55,8 @@ const renderMeal = async () => {
             </div>
             <button type="button" class="commentBtn seeCommentsBtn">Comments</button>
           </article>
-  `
-);
+  `,
+  );
   mealsListContainer.innerHTML = mealItem.join('');
 
   const displayLikes = async (targetId, likesTotal) => {
@@ -69,14 +69,12 @@ const renderMeal = async () => {
     }
   };
 
-
   const likeBtns = document.querySelectorAll('.likeBtn');
   likeBtns.forEach((likeBtn) => {
     likeBtn.addEventListener('click', async (event) => {
       event.preventDefault();
       likeBtn.classList.add('color');
-      const id =
-        event.target.parentNode.parentNode.parentNode.getAttribute('id');
+      const id = event.target.parentNode.parentNode.parentNode.getAttribute('id');
       await postLike({
         item_id: id,
       });
@@ -182,7 +180,7 @@ const renderMeal = async () => {
         <p class="username">${data.username}: </p>
         <p class="comment">${data.comment}</p>
       </li>
-        `
+        `,
         );
         listContainer.innerHTML = commentItem.join('');
       };
@@ -195,19 +193,15 @@ const renderMeal = async () => {
       displayComments();
     });
   });
-
 };
 const displayMeals = async () => {
-    
   const totalMealsNumber = document.querySelector('.totalMeals');
-   const response = await getMeals();
+  const response = await getMeals();
   const total = totalMeals(response);
   totalMealsNumber.innerHTML = total;
-  
 };
 displayMeals();
 
 window.addEventListener('DOMContentLoaded', () => {
   renderMeal();
 });
-

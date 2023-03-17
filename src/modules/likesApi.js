@@ -9,7 +9,7 @@ export const postLike = async (likeData) => {
           charset: 'utf-8',
         },
         body: JSON.stringify(likeData),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -27,7 +27,7 @@ export const getLikes = async () => {
     'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Et4qFKlhg2AwekIfP1aj/likes',
     {
       method: 'GET',
-    }
+    },
   );
   const commentResponse = await getStatus.json();
   const likesArray = Array.isArray(commentResponse) ? commentResponse : [];
