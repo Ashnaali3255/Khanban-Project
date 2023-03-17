@@ -34,13 +34,3 @@ export const getLikes = async () => {
   return likesArray;
 };
 
-// export const getLikes = async () => {
-//   const getStatus = await fetch(
-//     'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Et4qFKlhg2AwekIfP1aj/likes',
-//     {
-//       method: 'GET',
-//     }
-//   );
-//   const commentResponse = await getStatus.json();
-//   return commentResponse;
-// };

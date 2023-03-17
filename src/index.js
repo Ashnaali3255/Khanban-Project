@@ -24,18 +24,6 @@ const getNumberOfLikes = (response, likes) => {
 const renderMeal = async () => {
   const response = await getMeals();
 
-  // const displayMeals = async () => {
-
-  //     const totalMealsNumber = document.querySelector('.totalMeals');
-  //      const response = await getMeals();
-  //     const total = totalMeals(response);
-  //     if (!total) {
-  //       totalMealsNumber.innerHTML = 0;
-  //     } else {
-  //       totalMealsNumber.innerHTML = total;
-  //     }
-  //     displayMeals();
-
   const likes = await getLikes();
   const numberOfLikes = getNumberOfLikes(response, likes);
 
